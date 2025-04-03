@@ -10,7 +10,7 @@ public class KitClock : MonoBehaviour
     public float timeAnHourTakes = 5;
 
     public float t;
-    public int hour = 0;
+    public int hour;
     public UnityEvent<int> OnTheHour;
     Coroutine clockIsRunning;
     IEnumerator doOneHour;
@@ -46,6 +46,5 @@ public class KitClock : MonoBehaviour
         }
         OnTheHour.Invoke(hour);
     }
-  
-       }
+  }
 

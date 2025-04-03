@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class KitChime : MonoBehaviour
 {
-    public void Chime()
+    public void Chime(int hour)
     {
-        Debug.Log("Chiming !");
+        Debug.Log("Chiming !" + hour);
     }
 }
