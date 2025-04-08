@@ -29,7 +29,7 @@ public class Spawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     IEnumerator keepSpawn()
@@ -42,18 +42,20 @@ public class Spawn : MonoBehaviour
     IEnumerator TimeToSpawn()
     {
         t = 0;//time start
-        while(t < 5)//time from 0 to 5
+        while (t < 5)//time from 0 to 5
         {
             t += Time.deltaTime; // add the time everytime
             yield return null; // stop 1 frame
         }
         int randomAnimal = Random.Range(0, 2);//create the dog or cat randomly between 0 and 1
-        if(randomAnimal == 0) //when it is 0, creat dog
+        if (randomAnimal == 0) //when it is 0, creat dog
         {
             newDog = Instantiate(Dog, new Vector2(Random.Range(-5, 5), Random.Range(-5, 5)), Quaternion.identity);
-        }else if (randomAnimal == 1) // when it is 1 create cat
+        }
+        else if (randomAnimal == 1) // when it is 1 create cat
         {
             newCat = Instantiate(Cat, new Vector2(Random.Range(-5, 5), Random.Range(-5, 5)), Quaternion.identity);
         }
     }
 }
+
