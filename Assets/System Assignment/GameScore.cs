@@ -5,13 +5,13 @@ using TMPro;
 
 public class GameScore : MonoBehaviour
 {
-    public TextMeshPro scoreText;
+    public TextMeshProUGUI scoreText;
     private int currentScore = 0;
 
     public void AddScore()
         {
         currentScore++;
-        scoreText.text = string.Format("score:{0}/20", currentScore);
+        scoreText.text = currentScore.ToString();
         if(currentScore >= 20)
         {
             Time.timeScale = 0;
@@ -22,7 +22,7 @@ public class GameScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        scoreText.text = currentScore.ToString();
     }
 
     // Update is called once per frame

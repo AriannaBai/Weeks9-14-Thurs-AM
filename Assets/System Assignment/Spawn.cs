@@ -6,35 +6,59 @@ public class Spawn : MonoBehaviour
 {
     public GameObject Dog; // reference of the dog prefab
     GameObject newDog;    // standing for all new create dog
-    List<GameObject> SpawnDog;// List for saving all the new spawn dog 
     public GameObject Cat;// reference of the cat prefab
     GameObject newCat;// standing for all new create cat
-    List<GameObject> SpawnCat;// List for saving all the new spawn cat
 
     public float t; // set a variable for time 
+
+    GameScore gameScore;
     // Start is called before the first frame update
     void Start()
     {
-        SpawnDog = new List<GameObject>(); //initialize all lists
-        SpawnCat = new List<GameObject>();
-
         //When the game just start, spawn these two prefabs
         newDog = Instantiate(Dog, new Vector2(Random.Range(-5, 5), Random.Range(-5, 5)), Quaternion.identity); // the prefab for dog, location and do not rotate
         newCat = Instantiate(Cat, new Vector2(Random.Range(-5, 5), Random.Range(-5, 5)), Quaternion.identity);// the prefab for cat, location and do not rotate
 
         // start continuing coroutine
         StartCoroutine(keepSpawn());
+
+        gameScore = GetComponent<GameScore>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            CheckDog();
+            CheckCat();
+        }
+    }
 
+    public void CheckDog()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float checkSpriteDistance = Vector2.Distance(mousePos, newDog.transform.position);
+        if(checkSpriteDistance < 1.5)
+        {
+            Destroy(newDog);
+            gameScore.AddScore();
+        }
+    }
+    public void CheckCat()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float checkSpriteDistance = Vector2.Distance(mousePos, newCat.transform.position);
+        if (checkSpriteDistance < 1.5)
+        {
+            Destroy(newCat);
+            gameScore.AddScore();
+        }
     }
 
     IEnumerator keepSpawn()
     {
-        while (true)  // always run 
+        while (true)  // always run
         {
             yield return StartCoroutine(TimeToSpawn());// the prefab for dog and cat restart 
         }
@@ -58,4 +82,3 @@ public class Spawn : MonoBehaviour
         }
     }
 }
-
