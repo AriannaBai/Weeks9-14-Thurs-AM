@@ -7,35 +7,36 @@ using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour
 {
-    private Text timerText;
-    private float timeLeft = 120f;
-    public TextMeshProUGUI time;
+    public Slider slider;
+    float timeLeft = 20f;
+
+    public GameObject gameLose;
+
     // Start is called before the first frame update
     void Start()
     {
+        slider.minValue = 0;
+        slider.maxValue = 20f;
+        slider.value = 20f;
     }
 
     void Update()
     {
+
         if (timeLeft > 0)
         {
             timeLeft -= Time.deltaTime;
-            UpdateTimerDisplay();
+            slider.value = timeLeft;
         }
         else
         {
-            timerText.text = "0:00";
-            Time.timeScale = 0;
-            Debug.Log("GAME FINISHED");
+            slider.value = 0;
+        }
 
-
+        if(slider.value<=0)
+        {
+            gameLose.SetActive(true);
         }
     }
-    void UpdateTimerDisplay()
-    {
-        int minutes = (int)(timeLeft / 60);
-        int seconds = (int)(timeLeft % 60);
-        timerText.text = minutes + ":" + seconds.ToString("00");
 
-    }
 }
